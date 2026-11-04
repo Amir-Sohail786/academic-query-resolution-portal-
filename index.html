@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Academic Query Resolution Portal</title>
+  <meta name="description" content="Ticket-based academic query portal with transparent status tracking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    // Apply the saved theme before first paint so there is no flash.
+    (function () {
+      let theme = "light";
+      try {
+        const saved = localStorage.getItem("aqrp_theme");
+        if (saved) { theme = JSON.parse(saved); }
+      } catch (error) { theme = "light"; }
+      document.documentElement.setAttribute("data-theme", theme === "dark" ? "dark" : "light");
+    })();
+  </script>
+</head>
+<body class="public">
+  <a class="skip-link" href="#view">Skip to main content</a>
+
+  <div class="app" id="app">
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <span class="brand-logo" aria-hidden="true">AQ</span>
+        <span class="brand-text">Query Portal</span>
+      </div>
+      <nav id="sidebar-nav"></nav>
+      <button class="btn btn-ghost sidebar-collapse" id="collapse-btn" aria-label="Collapse sidebar">&#171; Collapse</button>
+    </aside>
+
+    <div class="main-wrap">
+      <header class="topbar" id="topbar">
+        <button class="icon-btn hamburger" id="hamburger" aria-label="Open menu">&#9776;</button>
+        <form class="track-form" id="track-form" role="search">
+          <label class="sr-only" for="track-input">Track ticket</label>
+          <input id="track-input" type="text" placeholder="Track ticket e.g. AQ-2026-0001" autocomplete="off">
+        </form>
+        <div class="topbar-actions">
+          <div class="dropdown" id="bell-wrap">
+            <button class="icon-btn" id="bell-btn" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
+              &#128276;<span class="bell-badge" id="bell-badge" hidden>0</span>
+            </button>
+            <div class="dropdown-menu bell-menu" id="bell-menu" hidden></div>
+          </div>
+          <button class="icon-btn" id="theme-btn" aria-label="Toggle dark mode">&#9728;</button>
+          <div class="dropdown" id="user-wrap">
+            <button class="user-btn" id="user-btn" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu" id="user-menu" hidden></div>
+          </div>
+        </div>
+      </header>
+
+      <main id="view" tabindex="-1"></main>
+
+      <footer class="footer">CSE326 Internet Programming - CA1 Project</footer>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toast-container" aria-live="polite"></div>
+  <div id="modal-root"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/tickets.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
